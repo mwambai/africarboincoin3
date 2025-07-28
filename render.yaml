@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: africarboncoin
+    env: node
+    buildCommand: npm run build
+    startCommand: npm run start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: africarboncoin-db
+          property: connectionString
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: SENDGRID_API_KEY
+        sync: false
+
+databases:
+  - name: africarboncoin-db
+    databaseName: africarboncoin
+    user: africarboncoin
